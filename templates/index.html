@@ -2,35 +2,75 @@
 <html>
 <head>
     <title>Nudge — Task Manager</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
-    <h1> Nudge Task Manager</h1>
+    <h1>Nudge Task Manager</h1>
 
+    <!-- ADD TASK FORM -->
+    <form method="POST" action="/add" class="task-form">
+        <input type="text" name="title" placeholder="Task title" required>
+
+        <select name="priority" required>
+            <option value="">Priority</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <select name="task_type" required>
+            <option value="">Task type</option>
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+            <option value="urgent">Urgent</option>
+        </select>
+
+        <input type="text" name="category" placeholder="Category (personal)">
+        <input type="text" name="deadline" placeholder="Deadline (work / urgent)">
+        <input type="text" name="reason" placeholder="Reason (urgent)">
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr>
+
+    <!-- TASK LIST -->
     {% for task in tasks %}
         <div class="task {{ task.task_type }}">
             <strong>{{ task.title }}</strong><br>
-
             <span>Priority: {{ task.priority }}</span><br>
 
             {% if task.task_type == "personal" %}
                 <span>Category: {{ task.category }}</span><br>
                 <span>Status: {{ task.status }}</span>
+
+                <!-- UPDATE STATUS -->
+                <form method="POST" action="/status/{{ task.title }}">
+                    <select name="status">
+                        <option value="pending">pending</option>
+                        <option value="in progress">in progress</option>
+                        <option value="done">done</option>
+                    </select>
+                    <button type="submit">Update</button>
+                </form>
+
             {% elif task.task_type == "work" %}
                 <span>Deadline: {{ task.deadline }}</span>
+
             {% elif task.task_type == "urgent" %}
                 <span>Deadline: {{ task.deadline }}</span><br>
                 <span>Reason: {{ task.reason }}</span>
             {% endif %}
+
+            <!-- DELETE -->
+            <form method="POST" action="/delete/{{ task.title }}">
+                <button type="submit">Delete</button>
+            </form>
         </div>
     {% endfor %}
 
-    <div class="footer">
-        Built with Flask · Render · Python 💻
-    </div>
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
