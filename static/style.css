@@ -1,0 +1,78 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.container {
+    width: 80%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.task {
+    background: rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 15px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.task:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.task strong {
+    font-size: 1.05rem;
+}
+
+.task span {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Task types */
+.personal {
+    border-left: 5px solid #4ade80;
+}
+
+.work {
+    border-left: 5px solid #60a5fa;
+}
+
+.urgent {
+    border-left: 5px solid #f87171;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
